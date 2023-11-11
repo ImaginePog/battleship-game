@@ -4,7 +4,7 @@
   "description": "A battleship game played against the pc implemented in JS for the goal of learning Test Driven Development.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll src/test_suites/*.js",
+    "test": "jest --watchAll src/test_suites/*.js --verbose",
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack-dev-server --config webpack.dev.js --open"
   },
