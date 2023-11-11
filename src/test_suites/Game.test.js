@@ -11,5 +11,24 @@ describe("Game basic tests", () => {
     expect(game.height).toBe(10);
   });
 });
+
+describe("Game advanced tests", () => {
+  let game;
+  beforeEach(() => {
+    game = new Game();
+  });
+
+  test("Games can place ships", () => {
+    expect(game.placeShip).toBeDefined();
+  });
+
+  test("Games places ships correctly", () => {
+    game.placeShip("Battle", { x: 0, y: 0 }, "x");
+    expect(game.ships[game.ships.length - 1].occupied).toEqual([
+      { x: 0, y: 0 },
+      { x: 1, y: 0 },
+      { x: 2, y: 0 },
+      { x: 3, y: 0 },
+    ]);
   });
 });
