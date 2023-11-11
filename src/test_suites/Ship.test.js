@@ -52,4 +52,10 @@ describe("Ship advanced tests", () => {
     shippy.hit();
     expect(shippy.health).toBe(0);
   });
+
+  test("Ships take positions", () => {
+    const pos = { x: 2, y: 3 };
+    const shippy = new Ship("Patrol", pos);
+    expect(shippy.position).toEqual(pos);
+  });
 });

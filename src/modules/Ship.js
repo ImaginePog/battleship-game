@@ -7,9 +7,10 @@ const shipTypeLengths = {
 };
 
 export default class Ship {
-  constructor(type) {
+  constructor(type, position) {
     this.type = type || "Carrier";
     this.length = this.health = shipTypeLengths[this.type];
+    this.position = position || { x: 0, y: 0 };
   }
 
   hit() {
