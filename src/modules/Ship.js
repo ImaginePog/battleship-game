@@ -13,6 +13,10 @@ export default class Ship {
   }
 
   hit() {
-    this.health--;
+    if (!this.sunk) this.health--;
+  }
+
+  get sunk() {
+    return this.health <= 0;
   }
 }

@@ -34,4 +34,22 @@ describe("Ship advanced tests", () => {
 
     expect(shippy.health).toBe(2);
   });
+
+  test("Ships can sink", () => {
+    const shippy = new Ship("Patrol");
+
+    expect(shippy.sunk).toBe(false);
+    shippy.hit();
+    shippy.hit();
+    expect(shippy.sunk).toBe(true);
+  });
+
+  test("Sunken ships cant take hits", () => {
+    const shippy = new Ship("Patrol");
+    shippy.hit();
+    shippy.hit();
+    expect(shippy.sunk).toBe(true);
+    shippy.hit();
+    expect(shippy.health).toBe(0);
+  });
 });
