@@ -4,18 +4,28 @@
   "description": "A battleship game played against the pc implemented in JS for the goal of learning Test Driven Development.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll *.js"
+    "test": "jest --watchAll *.js",
+    "build": "webpack --config webpack.prod.js",
+    "watch": "webpack-dev-server --config webpack.dev.js --open"
   },
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
     "babel-jest": "^29.7.0",
+    "css-loader": "^6.8.1",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.3",
     "jest": "^29.7.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.9.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "css-minimizer-webpack-plugin": "^5.0.1"
+  }
 }
