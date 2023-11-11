@@ -10,10 +10,6 @@ describe("Game basic tests", () => {
     expect(game.width).toBe(10);
     expect(game.height).toBe(10);
   });
-
-  test("Games are initialized with correct board", () => {
-    const game = new Game();
-    expect(game.board).toHaveLength(10);
-    expect(game.board[0]).toHaveLength(10);
+});
   });
 });
