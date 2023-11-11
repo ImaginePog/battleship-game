@@ -1,3 +1,5 @@
+import Ship from "../modules/Ship";
+
 describe("Ship basic tests", () => {
   test("Ships have types", () => {
     const shippy = new Ship("Battle");
