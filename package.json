@@ -1,0 +1,10 @@
+{
+  "name": "battleship-game",
+  "version": "1.0.0",
+  "description": "A battleship game played against the pc implemented in JS for the goal of learning Test Driven Development.",
+  "main": "index.js",
+  "scripts": {},
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
