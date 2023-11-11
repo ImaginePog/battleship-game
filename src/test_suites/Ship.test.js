@@ -44,7 +44,7 @@ describe("Ship advanced tests", () => {
     expect(shippy.sunk).toBe(true);
   });
 
-  test("Sunken ships cant take hits", () => {
+  test("Sunken ships can't take hits", () => {
     const shippy = new Ship("Patrol");
     shippy.hit();
     shippy.hit();
@@ -57,5 +57,13 @@ describe("Ship advanced tests", () => {
     const pos = { x: 2, y: 3 };
     const shippy = new Ship("Patrol", pos);
     expect(shippy.position).toEqual(pos);
+  });
+
+  test("Ships take axis", () => {
+    const pos = { x: 2, y: 3 };
+    const axis = "x";
+
+    const shippy = new Ship("Patrol", pos, axis);
+    expect(shippy.axis).toEqual(axis);
   });
 });
