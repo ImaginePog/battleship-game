@@ -25,3 +25,13 @@ describe("Ship basic tests", () => {
     expect(carrierShip.length).toBe(5);
   });
 });
+
+describe("Ship advanced tests", () => {
+  test("Ships can take hits", () => {
+    const shippy = new Ship("Battle");
+    shippy.hit();
+    shippy.hit();
+
+    expect(shippy.health).toBe(2);
+  });
+});
