@@ -66,4 +66,26 @@ describe("Ship advanced tests", () => {
     const shippy = new Ship("Patrol", pos, axis);
     expect(shippy.axis).toEqual(axis);
   });
+
+  test("Ships occupy spaces according to their length", () => {
+    const pos = { x: 2, y: 3 };
+    const axis = "x";
+
+    const shippy = new Ship("Patrol", pos, axis);
+    expect(shippy.occupied).toHaveLength(shippy.length);
+
+    const shippy2 = new Ship("Destroyer", pos, axis);
+    expect(shippy2.occupied).toHaveLength(shippy2.length);
+  });
+
+  test("Spaces occupied are correct according to position and axis", () => {
+    const pos = { x: 0, y: 0 };
+    const axis = "x";
+
+    const shippy = new Ship("Patrol", pos, axis);
+    expect(shippy.occupied).toEqual([
+      { x: 0, y: 0 },
+      { x: 1, y: 0 },
+    ]);
+  });
 });
