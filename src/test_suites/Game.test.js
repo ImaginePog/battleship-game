@@ -33,6 +33,10 @@ describe("Game advanced tests", () => {
     ]);
   });
 
+  test("Games can return a space from the board", () => {
+    expect(game.getSpace(0, 5)).toBeDefined();
+  });
+
   test("Games can place ships", () => {
     expect(game.placeShip).toBeDefined();
   });
@@ -47,7 +51,7 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Game calibrates ships that go out of bounds in the x axis", () => {
+  test("Games calibrates ships that go out of bounds in the x axis", () => {
     game.placeShip("Battle", { x: 9, y: 0 }, "x");
     expect(game.ships[game.ships.length - 1].occupied).toEqual([
       { x: 6, y: 0 },
@@ -57,7 +61,7 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Game calibrates ships that go out of bounds in the y axis", () => {
+  test("Games calibrates ships that go out of bounds in the y axis", () => {
     game.placeShip("Battle", { x: 0, y: 9 }, "y");
     expect(game.ships[game.ships.length - 1].occupied).toEqual([
       { x: 0, y: 6 },
@@ -67,7 +71,7 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Game won't allow ships to be placed over other ships", () => {
+  test("Games won't allow ships to be placed over other ships", () => {
     game.placeShip("Patrol", { x: 0, y: 0 }, "x");
     expect(game.placeShip("Patrol", { x: 0, y: 0 }, "x")).toBe(false);
   });
