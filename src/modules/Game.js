@@ -21,6 +21,9 @@ export default class Game {
 
     return board;
   }
+  getSpace(x, y) {
+    return this.board[x][y];
+  }
 
   calibrate(ship) {
     let outOfBounds = false;
