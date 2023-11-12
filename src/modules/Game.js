@@ -5,6 +5,21 @@ export default class Game {
     this.width = 10;
     this.height = 10;
     this.ships = [];
+    this.board = this.createBoard();
+  }
+
+  createBoard() {
+    const board = [];
+
+    for (let i = 0; i < this.height; ++i) {
+      const row = [];
+      for (let j = 0; j < this.width; ++j) {
+        row.push(" ");
+      }
+      board.push(row);
+    }
+
+    return board;
   }
 
   calibrate(ship) {
