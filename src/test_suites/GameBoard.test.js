@@ -107,4 +107,8 @@ describe("Gameboard advanced tests", () => {
     expect(gameboard.placeShip("Battle", { x: 1, y: 0 }, "y")).toBe(false);
     expect(gameboard.placeShip("Battle", { x: 2, y: 0 }, "y")).toBe(true);
   });
+
+  test("Gameboards can take shots from another player or something", () => {
+    expect(gameboard.takeShot).toBeDefined();
+  });
 });
