@@ -21,8 +21,13 @@ export default class Game {
 
     return board;
   }
+
   getSpace(x, y) {
     return this.board[x][y];
+  }
+
+  setSpace(x, y, token) {
+    this.board[x][y] = token;
   }
 
   calibrate(ship) {
@@ -55,6 +60,7 @@ export default class Game {
 
   placeShip(type, position, axis) {
     let placedShip = this.calibrate(new Ship(type, position, axis));
+
     this.ships.push(placedShip);
   }
 }
