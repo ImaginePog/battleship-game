@@ -141,4 +141,12 @@ describe("Gameboard advanced tests", () => {
     gameboard.takeShot(3, 5);
     expect(gameboard.ships[gameboard.ships.length - 1].health).toBe(2);
   });
+
+  test("Gameboard sends messages about the shot (true: on target, false: missed, -1: cant shoot)", () => {
+    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
+    expect(gameboard.takeShot(1, 0)).toBe(true);
+
+    expect(gameboard.takeShot(9, 9)).toBe(false);
+    expect(gameboard.takeShot(9, 9)).toBe(-1);
+  });
 });
