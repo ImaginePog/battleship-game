@@ -72,4 +72,8 @@ export default class GameBoard {
     this.ships.push(placedShip);
     return true;
   }
+
+  takeShot(x, y) {
+    this.setSpace(x, y, "X");
+  }
 }
