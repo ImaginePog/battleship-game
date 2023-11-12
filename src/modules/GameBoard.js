@@ -104,4 +104,18 @@ export default class GameBoard {
       }
     }
   }
+
+  // Retur
+  areAllSunk() {
+    let sunk = true;
+
+    for (let i = 0; i < this.ships.length; ++i) {
+      if (!this.ships[i].sunk) {
+        sunk = false;
+        break;
+      }
+    }
+
+    return sunk;
+  }
 }

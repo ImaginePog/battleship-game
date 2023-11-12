@@ -149,4 +149,19 @@ describe("Gameboard advanced tests", () => {
     expect(gameboard.takeShot(9, 9)).toBe(false);
     expect(gameboard.takeShot(9, 9)).toBe(-1);
   });
+
+  test("Gameboard knows if all it's ships have sunk", () => {
+    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
+    gameboard.placeShip("Battle", { x: 0, y: 3 }, "x");
+
+    gameboard.takeShot(0, 0);
+    gameboard.takeShot(1, 0);
+
+    gameboard.takeShot(0, 3);
+    gameboard.takeShot(1, 3);
+    gameboard.takeShot(2, 3);
+    gameboard.takeShot(3, 3);
+
+    expect(gameboard.areAllSunk()).toBe(true);
+  });
 });
