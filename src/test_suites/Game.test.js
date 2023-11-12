@@ -104,5 +104,7 @@ describe("Game advanced tests", () => {
   test("Games won't allow ships to be placed over other ships", () => {
     game.placeShip("Patrol", { x: 0, y: 0 }, "x");
     expect(game.placeShip("Patrol", { x: 0, y: 0 }, "x")).toBe(false);
+    expect(game.placeShip("Battle", { x: 1, y: 0 }, "y")).toBe(false);
+    expect(game.placeShip("Battle", { x: 2, y: 0 }, "y")).toBe(true);
   });
 });

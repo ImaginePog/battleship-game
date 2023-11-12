@@ -61,9 +61,15 @@ export default class Game {
   placeShip(type, position, axis) {
     let placedShip = this.calibrate(new Ship(type, position, axis));
 
-    placedShip.occupied.forEach((space) => {
+    for (let i = 0; i < placedShip.occupied.length; ++i) {
+      const space = placedShip.occupied[i];
+      if (this.getSpace(space.x, space.y) !== " ") {
+        return false;
+      }
+
       this.setSpace(space.x, space.y, placedShip.token);
-    });
+    }
     this.ships.push(placedShip);
+    return true;
   }
 }
