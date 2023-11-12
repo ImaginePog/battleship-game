@@ -1,25 +1,25 @@
-import Game from "../modules/Game";
+import GameBoard from "../modules/GameBoard";
 
-describe("Game basic tests", () => {
-  let game;
+describe("Gameboard basic tests", () => {
+  let gameboard;
   beforeEach(() => {
-    game = new Game();
+    gameboard = new GameBoard();
   });
 
-  test("Game's board have correct width and height", () => {
-    expect(game.width).toBe(10);
-    expect(game.height).toBe(10);
+  test("Gameboard has correct width and height", () => {
+    expect(gameboard.width).toBe(10);
+    expect(gameboard.height).toBe(10);
   });
 });
 
-describe("Game advanced tests", () => {
-  let game;
+describe("Gameboard advanced tests", () => {
+  let gameboard;
   beforeEach(() => {
-    game = new Game();
+    gameboard = new GameBoard();
   });
 
-  test("Game creates board correctly", () => {
-    expect(game.board).toEqual([
+  test("Gameboard creates board correctly", () => {
+    expect(gameboard.board).toEqual([
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -33,14 +33,14 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Games can return a space from the board", () => {
-    expect(game.getSpace(0, 5)).toBeDefined();
+  test("Gameboard can return a space from the board", () => {
+    expect(gameboard.getSpace(0, 5)).toBeDefined();
   });
 
-  test("Games can update a space with a token", () => {
-    game.setSpace(5, 0, "B");
+  test("Gameboard can update a space with a token", () => {
+    gameboard.setSpace(5, 0, "B");
 
-    expect(game.board).toEqual([
+    expect(gameboard.board).toEqual([
       [" ", " ", " ", " ", " ", "B", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -54,20 +54,20 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Games can place ships", () => {
-    expect(game.placeShip).toBeDefined();
+  test("Gameboard can place ships", () => {
+    expect(gameboard.placeShip).toBeDefined();
   });
 
-  test("Games places ships correctly", () => {
-    game.placeShip("Battle", { x: 0, y: 0 }, "x");
-    expect(game.ships[game.ships.length - 1].occupied).toEqual([
+  test("Gameboard places ships correctly", () => {
+    gameboard.placeShip("Battle", { x: 0, y: 0 }, "x");
+    expect(gameboard.ships[gameboard.ships.length - 1].occupied).toEqual([
       { x: 0, y: 0 },
       { x: 1, y: 0 },
       { x: 2, y: 0 },
       { x: 3, y: 0 },
     ]);
 
-    expect(game.board).toEqual([
+    expect(gameboard.board).toEqual([
       ["B", "B", "B", "B", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -81,9 +81,9 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Games calibrates ships that go out of bounds in the x axis", () => {
-    game.placeShip("Battle", { x: 9, y: 0 }, "x");
-    expect(game.ships[game.ships.length - 1].occupied).toEqual([
+  test("Gameboard calibrates ships that go out of bounds in the x axis", () => {
+    gameboard.placeShip("Battle", { x: 9, y: 0 }, "x");
+    expect(gameboard.ships[gameboard.ships.length - 1].occupied).toEqual([
       { x: 6, y: 0 },
       { x: 7, y: 0 },
       { x: 8, y: 0 },
@@ -91,9 +91,9 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Games calibrates ships that go out of bounds in the y axis", () => {
-    game.placeShip("Battle", { x: 0, y: 9 }, "y");
-    expect(game.ships[game.ships.length - 1].occupied).toEqual([
+  test("Gameboard calibrates ships that go out of bounds in the y axis", () => {
+    gameboard.placeShip("Battle", { x: 0, y: 9 }, "y");
+    expect(gameboard.ships[gameboard.ships.length - 1].occupied).toEqual([
       { x: 0, y: 6 },
       { x: 0, y: 7 },
       { x: 0, y: 8 },
@@ -101,10 +101,10 @@ describe("Game advanced tests", () => {
     ]);
   });
 
-  test("Games won't allow ships to be placed over other ships", () => {
-    game.placeShip("Patrol", { x: 0, y: 0 }, "x");
-    expect(game.placeShip("Patrol", { x: 0, y: 0 }, "x")).toBe(false);
-    expect(game.placeShip("Battle", { x: 1, y: 0 }, "y")).toBe(false);
-    expect(game.placeShip("Battle", { x: 2, y: 0 }, "y")).toBe(true);
+  test("Gameboard won't allow ships to be placed over other ships", () => {
+    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
+    expect(gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x")).toBe(false);
+    expect(gameboard.placeShip("Battle", { x: 1, y: 0 }, "y")).toBe(false);
+    expect(gameboard.placeShip("Battle", { x: 2, y: 0 }, "y")).toBe(true);
   });
 });

@@ -1,6 +1,6 @@
 import Ship from "./Ship";
 
-export default class Game {
+export default class GameBoard {
   constructor() {
     this.width = 10;
     this.height = 10;
