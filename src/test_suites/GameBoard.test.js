@@ -129,4 +129,16 @@ describe("Gameboard advanced tests", () => {
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
     ]);
   });
+
+  test("Gameboards' ships take hits if the shot was on target", () => {
+    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
+    gameboard.takeShot(1, 0);
+
+    expect(gameboard.ships[gameboard.ships.length - 1].health).toBe(1);
+
+    gameboard.placeShip("Battle", { x: 0, y: 5 }, "x");
+    gameboard.takeShot(0, 5);
+    gameboard.takeShot(3, 5);
+    expect(gameboard.ships[gameboard.ships.length - 1].health).toBe(2);
+  });
 });
