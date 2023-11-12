@@ -67,6 +67,14 @@ describe("Ship advanced tests", () => {
     expect(shippy.axis).toEqual(axis);
   });
 
+  test("Ships have tokens to represent in the board", () => {
+    const pos = { x: 2, y: 3 };
+    const axis = "x";
+
+    const shippy = new Ship("Patrol", pos, axis);
+    expect(shippy.token).toBe("P");
+  });
+
   test("Ships occupy spaces according to their length", () => {
     const pos = { x: 2, y: 3 };
     const axis = "x";
