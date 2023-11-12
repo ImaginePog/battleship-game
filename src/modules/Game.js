@@ -13,7 +13,7 @@ export default class Game {
       if (ship.occupied[i].x > this.width - 1) {
         outOfBounds = true;
         break;
-      } else if (ship.occupied[i].x > this.height - 1) {
+      } else if (ship.occupied[i].y > this.height - 1) {
         outOfBounds = true;
         break;
       }
