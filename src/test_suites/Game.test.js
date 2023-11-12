@@ -38,7 +38,7 @@ describe("Game advanced tests", () => {
   });
 
   test("Games can update a space with a token", () => {
-    game.setSpace(0, 5, "B");
+    game.setSpace(5, 0, "B");
 
     expect(game.board).toEqual([
       [" ", " ", " ", " ", " ", "B", " ", " ", " ", " "],

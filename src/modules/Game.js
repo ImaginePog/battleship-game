@@ -23,11 +23,11 @@ export default class Game {
   }
 
   getSpace(x, y) {
-    return this.board[x][y];
+    return this.board[y][x];
   }
 
   setSpace(x, y, token) {
-    this.board[x][y] = token;
+    this.board[y][x] = token;
   }
 
   calibrate(ship) {
