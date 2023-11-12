@@ -111,4 +111,22 @@ describe("Gameboard advanced tests", () => {
   test("Gameboards can take shots from another player or something", () => {
     expect(gameboard.takeShot).toBeDefined();
   });
+
+  test("Gameboards update board with missed shots at correct positions", () => {
+    const imaginaryShot = { x: 3, y: 3 };
+    gameboard.takeShot(imaginaryShot.x, imaginaryShot.y);
+
+    expect(gameboard.board).toEqual([
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "X", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    ]);
+  });
 });
