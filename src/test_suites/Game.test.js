@@ -41,4 +41,14 @@ describe("Game advanced tests", () => {
       { x: 9, y: 0 },
     ]);
   });
+
+  test("Game calibrates ships that go out of bounds in the y axis", () => {
+    game.placeShip("Battle", { x: 0, y: 9 }, "y");
+    expect(game.ships[game.ships.length - 1].occupied).toEqual([
+      { x: 0, y: 6 },
+      { x: 0, y: 7 },
+      { x: 0, y: 8 },
+      { x: 0, y: 9 },
+    ]);
+  });
 });
