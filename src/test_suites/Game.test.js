@@ -1,9 +1,12 @@
 import Game from "../modules/Game";
+import Player from "../modules/Player";
 
 describe("Game basic tests", () => {
   let game;
   beforeEach(() => {
-    game = new Game("Player1", "Noob");
+    const player1 = new Player("Player1");
+    const player2 = new Player("Noob");
+    game = new Game(player1, player2);
   });
 
   test("Game has two players", () => {
