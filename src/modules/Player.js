@@ -9,4 +9,8 @@ export default class Player {
   placeShip(type, position, axis) {
     return this.gameboard.placeShip(type, position, axis);
   }
+
+  shoot(enemy, x, y) {
+    return enemy.gameboard.takeShot(x, y);
+  }
 }
