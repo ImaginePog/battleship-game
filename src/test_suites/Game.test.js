@@ -1,8 +1,18 @@
 import Game from "../modules/Game";
 
 describe("Game basic tests", () => {
+  let game;
+  beforeEach(() => {
+    game = new Game("Player1", "Noob");
+  });
+
   test("Game has two players", () => {
-    const game = new Game("Player1", "Noob");
     expect(game.players).toHaveLength(2);
+  });
+
+  test("Game keeps track of turns", () => {
+    expect(game.getCurrentPlayer().name).toBe("Player1");
+    game.nextTurn();
+    expect(game.getCurrentPlayer().name).toBe("Noob");
   });
 });
