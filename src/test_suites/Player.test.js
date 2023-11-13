@@ -1,3 +1,5 @@
+import Player from "../modules/Player";
+
 describe("Player basic tests", () => {
   test("Players have a name", () => {
     const player = Player("name");
