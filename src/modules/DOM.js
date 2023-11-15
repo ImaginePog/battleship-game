@@ -6,10 +6,10 @@ const DOM = (() => {
   }
 
   function load() {
-    add("player1-name");
-    add("player1-board");
-    add("player2-name");
-    add("player2-board");
+    add(".player1-name");
+    add(".player1-board");
+    add(".player2-name");
+    add(".player2-board");
   }
 
   // Returns the element if it has been loaded
