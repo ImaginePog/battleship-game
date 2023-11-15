@@ -2,6 +2,9 @@ export default class Game {
   constructor(player1) {
     this.players = [player1, new Computer()];
     this.turn = 0;
+    this.quit = false;
+  }
+
   }
 
   nextTurn() {
@@ -11,5 +14,21 @@ export default class Game {
 
   getCurrentPlayer() {
     return this.players[this.turn];
+  }
+
+  update() {}
+
+  render() {}
+
+  loop() {
+    if (this.quit) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      this.loop();
+    });
+
+    this.update();
   }
 }
