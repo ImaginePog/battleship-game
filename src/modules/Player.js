@@ -13,4 +13,8 @@ export default class Player {
   shoot(enemy, x, y) {
     return enemy.gameboard.takeShot(x, y);
   }
+
+  lost() {
+    return this.gameboard.areAllSunk();
+  }
 }
