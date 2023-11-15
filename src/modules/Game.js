@@ -5,10 +5,18 @@ export default class Game {
     this.quit = false;
   }
 
+  // For now log the result
+  checkEnd() {
+    const playerToCheck = this.getOtherPlayer();
+    this.quit = playerToCheck.lost();
+    if (this.quit) {
+      console.log(this.getCurrentPlayer().name + " HAS WON!!");
+    }
   }
 
   nextTurn() {
-    // Do other things before changing the turn
+    this.render();
+    this.checkEnd();
     this.turn = (this.turn + 1) % this.players.length;
   }
 
