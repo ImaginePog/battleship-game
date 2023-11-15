@@ -6,6 +6,7 @@ const DOM = (() => {
   }
 
   function load() {
+    add(".game-container");
     add(".player1-name");
     add(".player1-board");
     add(".player2-name");
