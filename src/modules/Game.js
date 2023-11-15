@@ -1,3 +1,7 @@
+import Computer from "./Computer";
+import DOM from "./DOM";
+import EventHandler from "./EventHandler";
+
 export default class Game {
   constructor(player1) {
     this.players = [player1, new Computer()];
@@ -5,6 +9,14 @@ export default class Game {
     this.quit = false;
   }
 
+  // Initialize the required stuff for game
+  init() {
+    DOM.load();
+    EventHandler.listen();
+    this.render();
+  }
+
+  // End the game if there was a condition
   // For now log the result
   checkEnd() {
     const playerToCheck = this.getOtherPlayer();
@@ -29,6 +41,7 @@ export default class Game {
       (player) => player.name !== this.getCurrentPlayer().name
     )[0];
   }
+
   update() {
     const currPlayer = this.getCurrentPlayer();
     const enemy = this.getOtherPlayer();
