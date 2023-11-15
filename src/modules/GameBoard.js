@@ -80,25 +80,28 @@ export default class GameBoard {
   takeShot(x, y) {
     // Mark as missed shot if empty space
     const space = this.getSpace(x, y);
+
     if (space === " ") {
       this.setSpace(x, y, "X");
       return false;
     }
 
     // Already shot here
-    if (space === "X") {
+    if (space === "X" || space === "S") {
       return -1;
     }
 
     // Space is a ship
+
     for (let i = 0; i < this.ships.length; ++i) {
       const occupiedSpaces = this.ships[i].occupied;
       const found = occupiedSpaces.findIndex(
-        (occupied) => occupied.x === x && occupied.y === y
+        (occupied) => occupied.x == x && occupied.y == y
       );
 
       // Found therefore this is the ship to take hit
       if (found >= 0) {
+        this.setSpace(x, y, "S");
         this.ships[i].hit();
         return true;
       }
