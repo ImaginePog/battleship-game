@@ -1,6 +1,6 @@
 export default class Game {
-  constructor(player1, player2) {
-    this.players = [player1, player2];
+  constructor(player1) {
+    this.players = [player1, new Computer()];
     this.turn = 0;
   }
 
