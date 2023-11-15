@@ -6,11 +6,12 @@ const DOM = (() => {
   }
 
   function load() {
+    add(".singleplayer-form");
     add(".game-container");
-    add(".player1-name");
-    add(".player1-board");
-    add(".player2-name");
-    add(".player2-board");
+    add(".player-header");
+    add(".player-board");
+    add(".enemy-name");
+    add(".enemy-board");
   }
 
   // Returns the element if it has been loaded
