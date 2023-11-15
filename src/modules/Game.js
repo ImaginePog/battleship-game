@@ -16,9 +16,12 @@ export default class Game {
     return this.players[this.turn];
   }
 
-  update() {}
+  getOtherPlayer() {
+    return this.players.filter(
+      (player) => player.name !== this.getCurrentPlayer().name
+    )[0];
+  }
 
-  render() {}
 
   loop() {
     if (this.quit) {
