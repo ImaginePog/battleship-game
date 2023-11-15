@@ -21,6 +21,35 @@ export default class Game {
       (player) => player.name !== this.getCurrentPlayer().name
     )[0];
   }
+  update() {
+    const currPlayer = this.getCurrentPlayer();
+    const enemy = this.getOtherPlayer();
+
+    if (currPlayer instanceof Computer) {
+      // Do computer logic
+      currPlayer.shoot(enemy);
+      this.nextTurn();
+
+      return;
+    } else {
+      // Player logic
+      // Wait for coords
+      const coords = EventHandler.getRecordedCoordinates();
+      if (coords.player == this.turn + 1) {
+        return;
+      }
+
+      if (coords.x && coords.y) {
+        const result = currPlayer.shoot(enemy, coords.x, coords.y);
+
+        if (result === -1) {
+          return;
+        }
+
+        this.nextTurn();
+      }
+    }
+  }
 
   render() {
     this.players.forEach((player, index) => {
