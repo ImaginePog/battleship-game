@@ -55,6 +55,9 @@ export default class Player {
           case "S":
             cell.classList.add("ship-cell");
             break;
+          case "O":
+            cell.classList.add("shot-cell");
+            break;
         }
 
         row.appendChild(cell);

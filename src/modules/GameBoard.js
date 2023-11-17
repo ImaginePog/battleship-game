@@ -71,7 +71,7 @@ export default class GameBoard {
 
       // Found therefore this is the ship to take hit
       if (found >= 0) {
-        this.setSpace(x, y, "S");
+        this.setSpace(x, y, "O");
         this.ships[i].hit();
         return true;
       }
