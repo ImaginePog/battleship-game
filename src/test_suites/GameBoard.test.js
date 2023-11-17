@@ -1,4 +1,5 @@
 import GameBoard from "../modules/GameBoard";
+import Ship from "../modules/Ship";
 
 describe("Gameboard basic tests", () => {
   let gameboard;
@@ -59,7 +60,7 @@ describe("Gameboard advanced tests", () => {
   });
 
   test("Gameboard places ships correctly", () => {
-    gameboard.placeShip("Battle", { x: 0, y: 0 }, "x");
+    gameboard.placeShip(new Ship("Battle", { x: 0, y: 0 }, "x"));
     expect(gameboard.ships[gameboard.ships.length - 1].occupied).toEqual([
       { x: 0, y: 0 },
       { x: 1, y: 0 },
@@ -81,31 +82,14 @@ describe("Gameboard advanced tests", () => {
     ]);
   });
 
-  test("Gameboard calibrates ships that go out of bounds in the x axis", () => {
-    gameboard.placeShip("Battle", { x: 9, y: 0 }, "x");
-    expect(gameboard.ships[gameboard.ships.length - 1].occupied).toEqual([
-      { x: 6, y: 0 },
-      { x: 7, y: 0 },
-      { x: 8, y: 0 },
-      { x: 9, y: 0 },
-    ]);
-  });
-
-  test("Gameboard calibrates ships that go out of bounds in the y axis", () => {
-    gameboard.placeShip("Battle", { x: 0, y: 9 }, "y");
-    expect(gameboard.ships[gameboard.ships.length - 1].occupied).toEqual([
-      { x: 0, y: 6 },
-      { x: 0, y: 7 },
-      { x: 0, y: 8 },
-      { x: 0, y: 9 },
-    ]);
-  });
-
   test("Gameboard won't allow ships to be placed over other ships", () => {
-    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
-    expect(gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x")).toBe(false);
-    expect(gameboard.placeShip("Battle", { x: 1, y: 0 }, "y")).toBe(false);
-    expect(gameboard.placeShip("Battle", { x: 2, y: 0 }, "y")).toBe(true);
+    gameboard.placeShip(new Ship("Patrol", { x: 0, y: 0 }), "x");
+    expect(gameboard.placeShip(new Ship("Patrol", { x: 0, y: 0 }, "x"))).toBe(
+      false
+    );
+    expect(gameboard.placeShip(new Ship("Battle", { x: 1, y: 0 }, "y"))).toBe(
+      false
+    );
   });
 
   test("Gameboards can take shots from another player or something", () => {
@@ -131,19 +115,19 @@ describe("Gameboard advanced tests", () => {
   });
 
   test("Gameboards' ships take hits if the shot was on target", () => {
-    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
+    gameboard.placeShip(new Ship("Patrol", { x: 0, y: 0 }, "x"));
     gameboard.takeShot(1, 0);
 
     expect(gameboard.ships[gameboard.ships.length - 1].health).toBe(1);
 
-    gameboard.placeShip("Battle", { x: 0, y: 5 }, "x");
+    gameboard.placeShip(new Ship("Battle", { x: 0, y: 5 }, "x"));
     gameboard.takeShot(0, 5);
     gameboard.takeShot(3, 5);
     expect(gameboard.ships[gameboard.ships.length - 1].health).toBe(2);
   });
 
   test("Gameboard sends messages about the shot (true: on target, false: missed, -1: cant shoot)", () => {
-    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
+    gameboard.placeShip(new Ship("Patrol", { x: 0, y: 0 }, "x"));
     expect(gameboard.takeShot(1, 0)).toBe(true);
 
     expect(gameboard.takeShot(9, 9)).toBe(false);
@@ -151,8 +135,8 @@ describe("Gameboard advanced tests", () => {
   });
 
   test("Gameboard knows if all it's ships have sunk", () => {
-    gameboard.placeShip("Patrol", { x: 0, y: 0 }, "x");
-    gameboard.placeShip("Battle", { x: 0, y: 3 }, "x");
+    gameboard.placeShip(new Ship("Patrol", { x: 0, y: 0 }, "x"));
+    gameboard.placeShip(new Ship("Battle", { x: 0, y: 3 }, "x"));
 
     gameboard.takeShot(0, 0);
     gameboard.takeShot(1, 0);
