@@ -1,9 +1,10 @@
 import GameBoard from "./GameBoard";
 
 export default class Player {
-  constructor(name) {
+  constructor(name, drawBoard) {
     this.name = name;
     this.gameboard = new GameBoard();
+    this.drawBoard = drawBoard;
   }
 
   placeShip(ship) {
@@ -18,8 +19,8 @@ export default class Player {
     return this.gameboard.areAllSunk();
   }
 
-  render(drawBoard, highlights) {
-    drawBoard.innerText = "";
+  render(highlights) {
+    this.drawBoard.innerText = "";
 
     for (let y = 0; y < this.gameboard.height; y++) {
       const row = document.createElement("div");
@@ -58,7 +59,7 @@ export default class Player {
 
         row.appendChild(cell);
       }
-      drawBoard.appendChild(row);
+      this.drawBoard.appendChild(row);
     }
   }
 }

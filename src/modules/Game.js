@@ -6,12 +6,15 @@ import Ship from "./Ship";
 
 export default class Game {
   constructor(type, player1Name, player2Name) {
-    this.player1 = new Player(player1Name);
+    const player1Board = DOM.getElement(".player1-board");
+    this.player1 = new Player(player1Name, player1Board);
+
+    const player2Board = DOM.getElement(".player2-board");
 
     if (type == "singleplayer") {
-      this.player2 = new Computer();
+      this.player2 = new Computer(player2Board);
     } else {
-      this.player2 = new Player(player2Name);
+      this.player2 = new Player(player2Name, player2Board);
     }
 
     this.width = 10;

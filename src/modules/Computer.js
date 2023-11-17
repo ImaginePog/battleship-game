@@ -1,8 +1,8 @@
 import Player from "./Player";
 
 export default class Computer extends Player {
-  constructor(name = "Computer") {
-    super(name);
+  constructor(drawBoard) {
+    super("Computer", drawBoard);
   }
 
   getRandomCoords(board) {
