@@ -57,7 +57,7 @@ export default class GameBoard {
     }
 
     // Already shot here
-    if (space === "X" || space === "S") {
+    if (space === "X" || space === "O") {
       return -1;
     }
 

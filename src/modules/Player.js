@@ -19,7 +19,7 @@ export default class Player {
     return this.gameboard.areAllSunk();
   }
 
-  render(highlights) {
+  render(showShips, highlights) {
     this.drawBoard.innerText = "";
 
     for (let y = 0; y < this.gameboard.height; y++) {

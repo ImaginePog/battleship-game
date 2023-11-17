@@ -1,6 +1,6 @@
+import App from "./App";
 import Computer from "./Computer";
 import DOM from "./DOM";
-import EventHandler from "./EventHandler";
 import Player from "./Player";
 import Ship from "./Ship";
 
@@ -40,7 +40,17 @@ export default class Game {
     this.currentPlayer.render();
   }
 
+  hasEnded() {
+    return this.otherPlayer.lost();
+  }
+
   nextTurn() {
+    // CheckEnd
+    if (this.hasEnded()) {
+      console.log(this.currentPlayer.name + " HAS WON!");
+      // App.end();
+      return;
+    }
     this.turn = (this.turn + 1) % 2;
 
     if (this.turn == 0) {
@@ -106,7 +116,36 @@ export default class Game {
     this.nextTurn();
   }
 
-  place() {
+  getRandomAxis() {
+    const rand = Math.random();
+    if (rand >= 0.5) {
+      return "x";
+    } else {
+      return "y";
+    }
+  }
+
+  getRandomCoords() {
+    return {
+      x: Math.floor(Math.random() * this.width),
+      y: Math.floor(Math.random() * this.height),
+    };
+  }
+
+  computerPlacement() {
+    this.shipsToPlace.forEach((shipType) => {
+      let placed = false;
+      while (!placed) {
+        let ship = this.calibrate(
+          new Ship(shipType, this.getRandomCoords(), this.getRandomAxis())
+        );
+        placed = this.otherPlayer.placeShip(ship);
+        console.log(placed);
+      }
+    });
+  }
+
+  async place() {
     const placed = this.currentPlayer.placeShip(this.currentPlacement.ship);
 
     if (!placed) {
@@ -118,7 +157,9 @@ export default class Game {
 
     this.currentPlayer.render();
 
+    // Placement is over
     if (this.currentPlacement.shipType >= this.shipsToPlace.length) {
+      this.computerPlacement();
       this.state = "playing";
       this.render();
       return;
@@ -136,7 +177,7 @@ export default class Game {
 
     this.currentPlacement.ship = highlightShip;
 
-    this.currentPlayer.render(highlightShip.occupied);
+    this.currentPlayer.render(true, highlightShip.occupied);
   }
 
   highlightSquare(coords) {
@@ -144,7 +185,7 @@ export default class Game {
       return;
     }
 
-    this.otherPlayer.render([coords]);
+    this.otherPlayer.render(false, [coords]);
   }
 
   highlight(coords) {
@@ -164,7 +205,7 @@ export default class Game {
   }
 
   render() {
-    this.player1.render();
-    this.player2.render();
+    this.player1.render(true);
+    this.player2.render(false);
   }
 }
