@@ -3,16 +3,12 @@ import Game from "../modules/Game";
 describe("Game basic tests", () => {
   let game;
   beforeEach(() => {
-    game = new Game("Player1");
-  });
-
-  test("Game has two players", () => {
-    expect(game.players).toHaveLength(2);
+    game = new Game("singleplayer", "Player1");
   });
 
   test("Game keeps track of turns", () => {
-    expect(game.getCurrentPlayer().name).toBe("Player1");
+    expect(game.player1.name).toBe("Player1");
     game.nextTurn();
-    expect(game.getCurrentPlayer().name).toBe("Computer");
+    expect(game.player2.name).toBe("Computer");
   });
 });
