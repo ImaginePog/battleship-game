@@ -3,8 +3,8 @@ import DOM from "./DOM";
 import EventHandler from "./EventHandler";
 
 export default class Game {
-  constructor(player1) {
-    this.players = [player1, new Computer()];
+  constructor(playerName) {
+    this.players = [new Player(playerName), new Computer()];
     this.turn = 0;
     this.quit = false;
   }
