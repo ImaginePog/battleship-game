@@ -1,5 +1,4 @@
 import Player from "./Player";
-import Ship from "./Ship";
 
 export default class Computer extends Player {
   constructor(drawBoard) {
