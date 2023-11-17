@@ -2,6 +2,7 @@ import Computer from "./Computer";
 import DOM from "./DOM";
 import EventHandler from "./EventHandler";
 import Player from "./Player";
+import Ship from "./Ship";
 
 export default class Game {
   constructor(type, player1Name, player2Name) {
@@ -13,9 +14,26 @@ export default class Game {
       this.player2 = new Player(player2Name);
     }
 
-    this.currentPlayer = this.player1;
+    this.width = 10;
+    this.height = 10;
 
+    this.player1.enemyBoard = this.player2.gameboard;
+    this.player2.enemyBoard = this.player1.gameboard;
+    this.currentPlayer = this.player1;
     this.turn = 0;
+
+    this.shipsToPlace = [
+      "Carrier",
+      "Battle",
+      "Patrol",
+      "Destroyer",
+      "Submarine",
+    ];
+
+    this.currentPlacement = { shipType: 0, axis: "x" };
+
+    this.state = "placement";
+    this.renderPlacement();
   }
 
   nextTurn() {
@@ -26,5 +44,113 @@ export default class Game {
     } else {
       this.currentPlayer = this.player2;
     }
+
+    if (this.currentPlayer instanceof Computer) {
+      this.playComputer();
+    }
+  }
+
+  calibrate(ship) {
+    let outOfBounds = false;
+    for (let i = 0; i < ship.occupied.length; ++i) {
+      if (ship.occupied[i].x > this.width - 1) {
+        outOfBounds = true;
+        break;
+      } else if (ship.occupied[i].y > this.height - 1) {
+        outOfBounds = true;
+        break;
+      }
+    }
+
+    if (outOfBounds) {
+      const newPosition = { x: 0, y: 0 };
+      if (ship.axis === "x") {
+        newPosition.x = ship.position.x - 1;
+        newPosition.y = ship.position.y;
+      } else {
+        newPosition.x = ship.position.x;
+        newPosition.y = ship.position.y - 1;
+      }
+
+      ship = this.calibrate(new Ship(ship.type, newPosition, ship.axis));
+    }
+
+    return ship;
+  }
+
+  playComputer() {
+    this.currentPlayer.shoot();
+    this.render();
+    this.nextTurn();
+  }
+
+  play(coords) {
+    if (coords.player == this.turn + 1) {
+      return;
+    }
+
+    const result = this.currentPlayer.shoot(coords.x, coords.y);
+
+    if (result === -1) {
+      // Cant shoot
+      return;
+    }
+
+    this.render();
+    this.nextTurn();
+  }
+
+  place() {
+    const placed = this.currentPlayer.placeShip(this.currentPlacement.ship);
+
+    if (!placed) {
+      alert("Cant place ships on the same square");
+      return;
+    }
+
+    this.currentPlacement.shipType++;
+
+    this.renderPlacement();
+
+    if (this.currentPlacement.shipType >= this.shipsToPlace.length) {
+      this.state = "playing";
+      this.render();
+      return;
+    }
+  }
+
+  highlight(coords) {
+    let highlightShip = this.calibrate(
+      new Ship(
+        this.shipsToPlace[this.currentPlacement.shipType],
+        { x: coords.x, y: coords.y },
+        this.currentPlacement.axis
+      )
+    );
+
+    this.currentPlacement.ship = highlightShip;
+
+    this.renderPlacement(highlightShip.occupied);
+  }
+
+  renderPlacement(highlights) {
+    const playerBoard = DOM.getElement(".player-board");
+    this.currentPlayer.render(playerBoard, highlights);
+  }
+
+  changeAxis() {
+    if (this.currentPlacement.axis == "x") {
+      this.currentPlacement.axis = "y";
+    } else {
+      this.currentPlacement.axis = "x";
+    }
+  }
+
+  render() {
+    const playerBoard = DOM.getElement(".player-board");
+    this.player1.render(playerBoard);
+
+    const enemyBoard = DOM.getElement(".enemy-board");
+    this.player2.render(enemyBoard);
   }
 }

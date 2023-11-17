@@ -1,5 +1,3 @@
-import Ship from "./Ship";
-
 export default class GameBoard {
   constructor() {
     this.width = 10;

@@ -1,36 +1,60 @@
+import App from "./App";
 import DOM from "./DOM";
 
 const EventHandler = (() => {
-  let coords = {};
-
-  function recordCoordinates(e) {
+  function handleGameClick(e) {
     const cell = e.target;
     if (!e.target.classList.contains("game-cell")) {
       return;
     }
     const board = e.target.closest(".game-board");
 
-    coords = {
-      x: cell.dataset.x,
-      y: cell.dataset.y,
+    App.respondCoords({
+      x: Number(cell.dataset.x),
+      y: Number(cell.dataset.y),
       player: board.dataset.player,
-    };
+    });
   }
 
-  function getRecordedCoordinates() {
-    const copy = Object.assign({}, coords);
+  function handleGameRightClick(e) {
+    e.preventDefault();
+    App.changeAxis();
+  }
 
-    // Clear recorded coordinates
-    coords = {};
-    return copy;
+  function handleGameHover(e) {
+    const cell = e.target;
+    if (!e.target.classList.contains("game-cell")) {
+      return;
+    }
+    const board = e.target.closest(".game-board");
+    App.highlightHover({
+      x: Number(cell.dataset.x),
+      y: Number(cell.dataset.y),
+      player: board.dataset.player,
+    });
+  }
+
+  function handleSingleplayer(e) {
+    e.preventDefault();
+    const name = e.target.elements[0].value;
+    e.target.reset();
+    e.target.classList.add("hidden");
+    DOM.getElement(".game-container").classList.remove("hidden");
+
+    App.startSingleplayer(name);
   }
 
   function listen() {
     const gameContainer = DOM.getElement(".game-container");
-    gameContainer.addEventListener("click", recordCoordinates);
+    gameContainer.addEventListener("click", handleGameClick);
+    gameContainer.addEventListener("mouseover", handleGameHover);
+    gameContainer.addEventListener("contextmenu", handleGameRightClick);
+
+    const singleplayerForm = DOM.getElement(".singleplayer-form");
+    singleplayerForm.addEventListener("submit", handleSingleplayer);
   }
 
-  return { listen, getRecordedCoordinates };
+  return { listen };
 })();
 
 export default EventHandler;

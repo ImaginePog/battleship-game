@@ -12,10 +12,14 @@ export default class Computer extends Player {
     return { x: shootX, y: shootY };
   }
 
-  shoot(enemy) {
-    let coords = this.getRandomCoords(enemy.gameboard);
-    while (enemy.gameboard.takeShot(coords.x, coords.y) === -1) {
-      coords = this.getRandomCoords(enemy.gameboard);
+  shoot() {
+    if (!this.enemyBoard) {
+      return;
+    }
+
+    let coords = this.getRandomCoords(this.enemyBoard);
+    while (this.enemyBoard.takeShot(coords.x, coords.y) === -1) {
+      coords = this.getRandomCoords(this.enemyBoard);
     }
   }
 }
