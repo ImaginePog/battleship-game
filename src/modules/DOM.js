@@ -8,10 +8,10 @@ const DOM = (() => {
   function load() {
     add(".singleplayer-form");
     add(".game-container");
-    add(".player-header");
-    add(".player-board");
-    add(".enemy-name");
-    add(".enemy-board");
+    add(".player1-header");
+    add(".player1-board");
+    add(".player2-header");
+    add(".player2-board");
   }
 
   // Returns the element if it has been loaded

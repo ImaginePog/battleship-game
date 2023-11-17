@@ -23,6 +23,7 @@ export default class Game {
     this.player1.enemyBoard = this.player2.gameboard;
     this.player2.enemyBoard = this.player1.gameboard;
     this.currentPlayer = this.player1;
+    this.otherPlayer = this.player2;
     this.turn = 0;
 
     this.shipsToPlace = [
@@ -36,7 +37,7 @@ export default class Game {
     this.currentPlacement = { shipType: 0, axis: "x" };
 
     this.state = "placement";
-    this.renderPlacement();
+    this.currentPlayer.render();
   }
 
   nextTurn() {
@@ -44,8 +45,10 @@ export default class Game {
 
     if (this.turn == 0) {
       this.currentPlayer = this.player1;
+      this.otherPlayer = this.player2;
     } else {
       this.currentPlayer = this.player2;
+      this.otherPlayer = this.player1;
     }
 
     if (this.currentPlayer instanceof Computer) {
@@ -113,7 +116,7 @@ export default class Game {
 
     this.currentPlacement.shipType++;
 
-    this.renderPlacement();
+    this.currentPlayer.render();
 
     if (this.currentPlacement.shipType >= this.shipsToPlace.length) {
       this.state = "playing";
@@ -122,7 +125,7 @@ export default class Game {
     }
   }
 
-  highlight(coords) {
+  highlightPlacement(coords) {
     let highlightShip = this.calibrate(
       new Ship(
         this.shipsToPlace[this.currentPlacement.shipType],
@@ -133,12 +136,23 @@ export default class Game {
 
     this.currentPlacement.ship = highlightShip;
 
-    this.renderPlacement(highlightShip.occupied);
+    this.currentPlayer.render(highlightShip.occupied);
   }
 
-  renderPlacement(highlights) {
-    const playerBoard = DOM.getElement(".player-board");
-    this.currentPlayer.render(playerBoard, highlights);
+  highlightSquare(coords) {
+    if (coords.player == this.turn + 1) {
+      return;
+    }
+
+    this.otherPlayer.render([coords]);
+  }
+
+  highlight(coords) {
+    if (this.state === "placement") {
+      this.highlightPlacement(coords);
+    } else {
+      this.highlightSquare(coords);
+    }
   }
 
   changeAxis() {
@@ -150,10 +164,7 @@ export default class Game {
   }
 
   render() {
-    const playerBoard = DOM.getElement(".player-board");
-    this.player1.render(playerBoard);
-
-    const enemyBoard = DOM.getElement(".enemy-board");
-    this.player2.render(enemyBoard);
+    this.player1.render();
+    this.player2.render();
   }
 }
