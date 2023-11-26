@@ -53,7 +53,7 @@ export default class Player {
           case "B":
           case "C":
           case "S":
-            cell.classList.add("ship-cell");
+            if (showShips) cell.classList.add("ship-cell");
             break;
           case "O":
             cell.classList.add("shot-cell");
