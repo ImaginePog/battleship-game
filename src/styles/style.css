@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.end-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Game stuff */
+
+.game-container {
+  display: flex;
+}
+
+.game-board,
+.choice-board {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.separate-boards {
+  gap: 3rem;
+}
+
+.game-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.game-cell {
+  width: 50px;
+  height: 50px;
+  background-color: green;
+}
+
+.highlight-cell {
+  background-color: rgb(150, 105, 112);
+}
+
+.ship-cell {
+  background-color: grey;
+}
+
+.missed-cell {
+  background-color: blue;
+}
+
+.shot-cell {
+  background-color: red;
+}
+
+/* UTILITY */
+
+.hidden {
+  display: none;
+}

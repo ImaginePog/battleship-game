@@ -70,6 +70,7 @@ export default class Game {
     // CheckEnd
     if (this.hasEnded()) {
       this.state = "over";
+      this.updateInfo("");
       App.end(this.currentPlayer, this.turn);
       return;
     }
@@ -133,7 +134,7 @@ export default class Game {
         this.render();
         setTimeout(() => {
           this.nextTurn();
-        }, 2000);
+        }, 1000);
       }, 1000);
     }, 1000);
   }
@@ -205,6 +206,7 @@ export default class Game {
       this.computerPlacement();
       this.state = "choice";
       this.updateInfo("Sink their ships!!");
+      DOM.getElement(".game-container").classList.add("separate-boards");
       this.render();
       return;
     }
