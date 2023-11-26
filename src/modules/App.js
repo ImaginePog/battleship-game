@@ -1,8 +1,14 @@
 import DOM from "./DOM";
+import EventHandler from "./EventHandler";
 import Game from "./Game";
 
 const App = (() => {
   let game;
+
+  function start() {
+    DOM.load();
+    EventHandler.listen();
+  }
 
   function startSingleplayer(name) {
     game = new Game("singleplayer", name);
@@ -66,6 +72,7 @@ const App = (() => {
   }
 
   return {
+    start,
     startSingleplayer,
     respondCoords,
     highlightHover,
