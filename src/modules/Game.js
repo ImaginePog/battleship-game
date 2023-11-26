@@ -47,8 +47,8 @@ export default class Game {
   nextTurn() {
     // CheckEnd
     if (this.hasEnded()) {
-      console.log(this.currentPlayer.name + " HAS WON!");
-      // App.end();
+      this.state = "over";
+      App.end(this.currentPlayer, this.turn);
       return;
     }
     this.turn = (this.turn + 1) % 2;
@@ -140,7 +140,6 @@ export default class Game {
           new Ship(shipType, this.getRandomCoords(), this.getRandomAxis())
         );
         placed = this.otherPlayer.placeShip(ship);
-        console.log(placed);
       }
     });
   }

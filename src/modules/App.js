@@ -1,3 +1,4 @@
+import DOM from "./DOM";
 import Game from "./Game";
 
 const App = (() => {
@@ -39,7 +40,28 @@ const App = (() => {
     game.highlight(coords);
   }
 
-  return { startSingleplayer, respondCoords, highlightHover, changeAxis };
+  function end(winner, turn) {
+    const gameContainer = DOM.getElement(".game-container");
+    gameContainer.classList.add("hidden");
+
+    const endContainer = DOM.getElement(".end-container");
+
+    // Say who won
+    const winText = DOM.getElement(".winner-text");
+    winText.innerText = winner.name + " wins!!";
+
+    // Congratulate if player won
+    const playerMsg = DOM.getElement(".player-message");
+    if (turn) {
+      playerMsg.innerText = "Better luck next time!!";
+    } else {
+      playerMsg.innerText = "Congratulations!!";
+    }
+
+    endContainer.classList.remove("hidden");
+  }
+
+  return { startSingleplayer, respondCoords, highlightHover, changeAxis, end };
 })();
 
 export default App;

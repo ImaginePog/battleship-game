@@ -12,6 +12,11 @@ const DOM = (() => {
     add(".player1-board");
     add(".player2-header");
     add(".player2-board");
+
+    add(".end-container");
+    add(".winner-text");
+    add(".player-message");
+    add(".restart-btn");
   }
 
   // Returns the element if it has been loaded
