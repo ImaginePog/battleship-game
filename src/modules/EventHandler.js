@@ -44,6 +44,14 @@ const EventHandler = (() => {
     App.startSingleplayer(name);
   }
 
+  function handleRestartClick(e) {
+    DOM.getElement(".end-container").classList.add("hidden");
+
+    App.restart();
+
+    DOM.getElement(".game-container").classList.remove("hidden");
+  }
+
   function listen() {
     const gameContainer = DOM.getElement(".game-container");
     gameContainer.addEventListener("click", handleGameClick);
@@ -52,6 +60,9 @@ const EventHandler = (() => {
 
     const singleplayerForm = DOM.getElement(".singleplayer-form");
     singleplayerForm.addEventListener("submit", handleSingleplayer);
+
+    const restartBtn = DOM.getElement(".restart-btn");
+    restartBtn.addEventListener("click", handleRestartClick);
   }
 
   return { listen };

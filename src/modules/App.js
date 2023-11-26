@@ -61,7 +61,18 @@ const App = (() => {
     endContainer.classList.remove("hidden");
   }
 
-  return { startSingleplayer, respondCoords, highlightHover, changeAxis, end };
+  function restart() {
+    game = new Game("singleplayer", game.player1.name);
+  }
+
+  return {
+    startSingleplayer,
+    respondCoords,
+    highlightHover,
+    changeAxis,
+    end,
+    restart,
+  };
 })();
 
 export default App;

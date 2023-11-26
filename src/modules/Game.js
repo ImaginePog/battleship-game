@@ -7,9 +7,11 @@ import Ship from "./Ship";
 export default class Game {
   constructor(type, player1Name, player2Name) {
     const player1Board = DOM.getElement(".player1-board");
+    player1Board.innerText = "";
     this.player1 = new Player(player1Name, player1Board);
 
     const player2Board = DOM.getElement(".player2-board");
+    player2Board.innerText = "";
 
     if (type == "singleplayer") {
       this.player2 = new Computer(player2Board);
@@ -202,6 +204,8 @@ export default class Game {
       this.currentPlacement.axis = "x";
     }
   }
+
+  reset() {}
 
   render() {
     this.player1.render(true);
