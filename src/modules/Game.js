@@ -38,8 +38,28 @@ export default class Game {
 
     this.currentPlacement = { shipType: 0, axis: "x" };
 
+    this.infoOutput = DOM.getElement(".info-container");
+
     this.state = "placement";
+    this.updatePlacementInfo();
     this.currentPlayer.render();
+  }
+
+  updateInfo(message) {
+    this.infoOutput.innerText = message;
+  }
+
+  updatePlacementInfo() {
+    let message = `Currently placing: ${
+      this.shipsToPlace[this.currentPlacement.shipType]
+    } ship`;
+
+    if (this.currentPlacement.axis === "x") {
+      message += " Horizontally";
+    } else {
+      message += " Vertically";
+    }
+    this.updateInfo(message);
   }
 
   hasEnded() {
@@ -56,9 +76,12 @@ export default class Game {
     this.turn = (this.turn + 1) % 2;
 
     if (this.turn == 0) {
+      this.state = "choice";
+      this.updateInfo("Choose a square to shoot at captain!");
       this.currentPlayer = this.player1;
       this.otherPlayer = this.player2;
     } else {
+      this.state = "computer";
       this.currentPlayer = this.player2;
       this.otherPlayer = this.player1;
     }
@@ -97,9 +120,22 @@ export default class Game {
   }
 
   playComputer() {
-    this.currentPlayer.shoot();
-    this.render();
-    this.nextTurn();
+    setTimeout(() => {
+      this.updateInfo("The computer is making its move...brace!!");
+      setTimeout(() => {
+        const result = this.currentPlayer.shoot();
+        if (result == true) {
+          this.updateInfo("Oh no! It hit our ship!");
+        } else {
+          this.updateInfo("Phew! It missed!");
+        }
+
+        this.render();
+        setTimeout(() => {
+          this.nextTurn();
+        }, 2000);
+      }, 1000);
+    }, 1000);
   }
 
   play(coords) {
@@ -109,9 +145,14 @@ export default class Game {
 
     const result = this.currentPlayer.shoot(coords.x, coords.y);
 
-    if (result === -1) {
+    if (result == true) {
+      this.updateInfo("Nice shot captain!!");
+    } else if (result === -1) {
+      this.updateInfo("Already shot there captain...");
       // Cant shoot
       return;
+    } else {
+      this.updateInfo("Oh no! We missed!");
     }
 
     this.render();
@@ -155,13 +196,14 @@ export default class Game {
     }
 
     this.currentPlacement.shipType++;
+    this.updatePlacementInfo();
 
     this.currentPlayer.render();
 
     // Placement is over
     if (this.currentPlacement.shipType >= this.shipsToPlace.length) {
       this.computerPlacement();
-      this.state = "playing";
+      this.state = "choice";
       this.render();
       return;
     }
@@ -203,9 +245,8 @@ export default class Game {
     } else {
       this.currentPlacement.axis = "x";
     }
+    this.updatePlacementInfo();
   }
-
-  reset() {}
 
   render() {
     this.player1.render(true);

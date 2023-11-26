@@ -53,13 +53,13 @@ const EventHandler = (() => {
   }
 
   function listen() {
+    const singleplayerForm = DOM.getElement(".singleplayer-form");
+    singleplayerForm.addEventListener("submit", handleSingleplayer);
+
     const gameContainer = DOM.getElement(".game-container");
     gameContainer.addEventListener("click", handleGameClick);
     gameContainer.addEventListener("mouseover", handleGameHover);
     gameContainer.addEventListener("contextmenu", handleGameRightClick);
-
-    const singleplayerForm = DOM.getElement(".singleplayer-form");
-    singleplayerForm.addEventListener("submit", handleSingleplayer);
 
     const restartBtn = DOM.getElement(".restart-btn");
     restartBtn.addEventListener("click", handleRestartClick);

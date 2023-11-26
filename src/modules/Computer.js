@@ -18,8 +18,11 @@ export default class Computer extends Player {
     }
 
     let coords = this.getRandomCoords();
-    while (this.enemyBoard.takeShot(coords.x, coords.y) === -1) {
+    let result = this.enemyBoard.takeShot(coords.x, coords.y);
+    while (result === -1) {
       coords = this.getRandomCoords();
+      result = this.enemyBoard.takeShot(coords.x, coords.y);
     }
+    return result;
   }
 }

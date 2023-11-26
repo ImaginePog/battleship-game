@@ -8,6 +8,7 @@ const DOM = (() => {
   function load() {
     add(".singleplayer-form");
     add(".game-container");
+    add(".info-container");
     add(".player1-header");
     add(".player1-board");
     add(".player2-header");

@@ -23,7 +23,7 @@ const App = (() => {
   function respondCoords(coords) {
     if (game.state === "placement") {
       place(coords);
-    } else {
+    } else if (game.state === "choice") {
       play(coords);
     }
   }
@@ -37,7 +37,7 @@ const App = (() => {
   }
 
   function highlightHover(coords) {
-    game.highlight(coords);
+    if (game.state !== "computer") game.highlight(coords);
   }
 
   function end(winner, turn) {
