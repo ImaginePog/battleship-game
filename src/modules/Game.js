@@ -204,6 +204,7 @@ export default class Game {
     if (this.currentPlacement.shipType >= this.shipsToPlace.length) {
       this.computerPlacement();
       this.state = "choice";
+      this.updateInfo("Sink their ships!!");
       this.render();
       return;
     }
