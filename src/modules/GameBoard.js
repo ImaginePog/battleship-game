@@ -28,9 +28,46 @@ export default class GameBoard {
     this.board[y][x] = token;
   }
 
+  getAdjacentSpaces(x, y) {
+    const spaces = [];
+
+    // Left
+    const leftSpace = { x: x - 1, y: y };
+    if (leftSpace.x >= 0) {
+      spaces.push(leftSpace);
+    }
+    // Right
+    const rightSpace = { x: x + 1, y: y };
+    if (rightSpace.x < this.width) {
+      spaces.push(rightSpace);
+    }
+
+    // Up
+    const upSpace = { x: x, y: y - 1 };
+    if (upSpace.y >= 0) {
+      spaces.push(upSpace);
+    }
+
+    // Down
+    const downSpace = { x: x, y: y + 1 };
+    if (downSpace.y < this.height) {
+      spaces.push(downSpace);
+    }
+
+    return spaces;
+  }
+
   placeShip(ship) {
     for (let i = 0; i < ship.occupied.length; ++i) {
       const space = ship.occupied[i];
+
+      const adjSpaces = this.getAdjacentSpaces(space.x, space.y);
+      for (let j = 0; j < adjSpaces.length; ++j) {
+        if (this.getSpace(adjSpaces[j].x, adjSpaces[j].y) !== " ") {
+          return false;
+        }
+      }
+
       if (this.getSpace(space.x, space.y) !== " ") {
         return false;
       }

@@ -192,7 +192,9 @@ export default class Game {
     const placed = this.currentPlayer.placeShip(this.currentPlacement.ship);
 
     if (!placed) {
-      alert("Cant place ships on the same square");
+      alert(
+        "Ships cannot be placed on the same square or their adjacent squares"
+      );
       return;
     }
 
