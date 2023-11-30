@@ -59,9 +59,15 @@ export default class Computer extends Player {
       if (this.lastHit) {
         if (target.x - this.lastHit.x == 0) {
           knownAxis = "y";
+          this.targets = this.targets.filter(
+            (target) => target.x - this.lastHit.x == 0
+          );
         }
         if (target.y - this.lastHit.y == 0) {
           knownAxis = "x";
+          this.targets = this.targets.filter(
+            (target) => target.y - this.lastHit.y == 0
+          );
         }
       }
       if (knownAxis == "x") {
