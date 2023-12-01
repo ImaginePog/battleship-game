@@ -14,6 +14,7 @@ const DOM = (() => {
     add(".player2-header");
     add(".player2-board");
 
+    add(".controls-container");
     add(".end-container");
     add(".winner-text");
     add(".player-message");

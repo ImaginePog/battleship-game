@@ -41,6 +41,8 @@ export default class Game {
     this.infoOutput = DOM.getElement(".info-container");
 
     this.state = "placement";
+    DOM.getElement(".controls-container").innerText =
+      "Click to place ships | Right click to rotate axis";
     this.updatePlacementInfo();
     this.currentPlayer.render();
   }
@@ -70,6 +72,7 @@ export default class Game {
     // CheckEnd
     if (this.hasEnded()) {
       this.state = "over";
+      DOM.getElement(".controls-container").innerText = "";
       this.updateInfo("");
       App.end(this.currentPlayer, this.turn);
       return;
@@ -207,6 +210,8 @@ export default class Game {
     if (this.currentPlacement.shipType >= this.shipsToPlace.length) {
       this.computerPlacement();
       this.state = "choice";
+      DOM.getElement(".controls-container").innerText =
+        "Click on enemy board to shoot";
       this.updateInfo("Sink their ships!!");
       DOM.getElement(".game-container").classList.add("separate-boards");
       this.render();
