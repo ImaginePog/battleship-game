@@ -9,8 +9,24 @@
     <main>
       <h1>BATTLESHIP</h1>
       <form class="singleplayer-form" data-game-type="single">
-        <input type="text" name="playerName" id="player-name" />
-        <button>Start</button>
+        <div class="form-main">
+          <input
+            type="text"
+            name="playerName"
+            id="player-name"
+            placeholder="Enter your name..."
+          />
+          <button>Start</button>
+        </div>
+        <div class="rules">
+          Arrange ships on the board each ship occupies a number of consecutive
+          squares on the grid, arranged either horizontally or vertically. The
+          number of squares for each ship is determined by the type of ship. The
+          ships cannot overlap (i.e., only one ship can occupy any given square
+          in the grid). The types and numbers of ships allowed are the same for
+          each player. Click on other player's board and sink all their ships to
+          win.
+        </div>
       </form>
 
       <div class="info-container"></div>
